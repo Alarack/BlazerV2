@@ -20,7 +20,7 @@ public class DamageOverTime : Status {
         base.Tick();
 
         if (targetEntity != null) {
-            CombatManager.ApplyUntrackedStatMod(source, target.GetComponent<Entity>(), Constants.BaseStatType.Health, effectDamage);
+            StatAdjustmentManager.ApplyUntrackedStatMod(source, target.GetComponent<Entity>(), Constants.BaseStatType.Health, effectDamage);
             //Debug.Log(effectDamage);
         }
         else {

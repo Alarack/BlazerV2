@@ -33,7 +33,7 @@ public class DurationalStatChange : Status {
 
         StatCollection.StatModifer mod = new StatCollection.StatModifer(statAdjValue, modType);
         mods.Add(mod);
-        CombatManager.ApplyTrackedStatMod(source, targetEntity, targetStat, mod);
+        StatAdjustmentManager.ApplyTrackedStatMod(source, targetEntity, targetStat, mod);
 
     }
 
@@ -42,7 +42,7 @@ public class DurationalStatChange : Status {
 
         for(int i = 0; i < count; i++) {
             Debug.Log("Cleaning durational stuff");
-            CombatManager.RemoveTrackedStatMod(targetEntity, targetStat, mods[i]);
+            StatAdjustmentManager.RemoveTrackedStatMod(targetEntity, targetStat, mods[i]);
         }
 
         base.CleanUp();

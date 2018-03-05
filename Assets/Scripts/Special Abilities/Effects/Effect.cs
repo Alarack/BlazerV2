@@ -71,9 +71,7 @@ public class Effect {
         data.AddInt("EffectType", (int)effectType);
 
         EventGrid.EventManager.SendEvent(Constants.GameEvent.EffectApplied, data);
-
     }
-
 
     #endregion
 
@@ -88,10 +86,6 @@ public class Effect {
         if (!string.IsNullOrEmpty(animationTrigger)) {
             parentAbility.source.MyAnimator.SetTrigger(animationTrigger);
         }
-        //else {
-        //    Debug.LogError("No animation trigger on " + effectName);
-        //}
-
 
         switch (deliveryMethod) {
             case Constants.EffectDeliveryMethod.Raycast:
@@ -114,7 +108,7 @@ public class Effect {
 
                 int count = parentAbility.targets.Count;
 
-                Debug.Log(parentAbility.abilityName + " has " + count + " targets");
+                //Debug.Log(parentAbility.abilityName + " has " + count + " targets");
 
                 for (int i = 0; i < count; i++) {
                     if(parentAbility.targets[i] != null)
@@ -178,8 +172,10 @@ public class Effect {
                 clones.Add(clone);
             }
 
-
-            //clones.Add(riders[i]);
+            if(riders[i] is EffectStatus) {
+                EffectStatus clone = new EffectStatus((EffectStatus)riders[i]);
+                clones.Add(clone);
+            }
         }
 
         return clones;

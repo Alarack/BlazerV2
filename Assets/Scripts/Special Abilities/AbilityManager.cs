@@ -14,17 +14,7 @@ public class AbilityManager : MonoBehaviour {
     public virtual void Initialize(Entity source) {
         this.source = source;
 
-
         PopulateSpecialAblities(abilityData);
-
-        //for(int i = 0; i < abilityData.Count; i++) {
-        //    SpecialAbility newAbility = new SpecialAbility();
-
-        //    newAbility.Initialize(source, abilityData[i], abilityData[i].sequencedAbilities);
-        //    abilities.Add(newAbility);
-
-        //}
-
     }
 
 

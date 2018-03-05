@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CombatManager : MonoBehaviour {
+public class StatAdjustmentManager : MonoBehaviour {
 
-    public static CombatManager combatManager;
+    public static StatAdjustmentManager statAdjustmentManager;
 
 
 
     void Awake() {
 
-        if (combatManager == null) {
-            combatManager = this;
+        if (statAdjustmentManager == null) {
+            statAdjustmentManager = this;
         }
         else {
             Destroy(gameObject);
@@ -19,16 +19,12 @@ public class CombatManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.M)) {
-            ApplyUntrackedStatMod(null, GameManager.GetPlayer(), Constants.BaseStatType.Money, 1f);
-        }
 
-        if (Input.GetKeyDown(KeyCode.K)) {
-            ApplyUntrackedStatMod(null, GameManager.GetPlayer(), Constants.BaseStatType.Keys, 1f);
-        }
     }
 
-
+    public static void AddStaticPlayerStatAdjustment(Constants.BaseStatType targetStat, float value) {
+        ApplyUntrackedStatMod(null, GameManager.GetPlayer(), targetStat, value);
+    }
 
     public static void ApplyUntrackedStatMod(Entity causeOfChagne, Entity targetOfChagnge, Constants.BaseStatType stat, float value, StatCollection.StatModificationType modType = StatCollection.StatModificationType.Additive) {
 
@@ -53,7 +49,7 @@ public class CombatManager : MonoBehaviour {
 
         targetOfChagnge.stats.ApplyUntrackedMod(stat, sendableValue, causeOfChagne, modType);
 
-        combatManager.SendStatChangeEvent(causeOfChagne, targetOfChagnge, stat, sendableValue);
+        statAdjustmentManager.SendStatChangeEvent(causeOfChagne, targetOfChagnge, stat, sendableValue);
 
         if (stat == Constants.BaseStatType.Health && value < 0f) {
             VisualEffectManager.MakeFloatingText(Mathf.Abs(sendableValue).ToString(), targetOfChagnge.transform.position);
@@ -65,7 +61,7 @@ public class CombatManager : MonoBehaviour {
 
         targetOfChange.stats.ApplyTrackedMod(stat, mod);
 
-        combatManager.SendStatChangeEvent(causeOfChagne, targetOfChange, stat, mod.value);
+        statAdjustmentManager.SendStatChangeEvent(causeOfChagne, targetOfChange, stat, mod.value);
 
         if (stat == Constants.BaseStatType.Health && mod.value < 0f) {
             VisualEffectManager.MakeFloatingText(Mathf.Abs(mod.value).ToString(), targetOfChange.transform.position);
@@ -77,7 +73,7 @@ public class CombatManager : MonoBehaviour {
 
         Debug.Log("Removing a mod: " + stat + " value of " + mod.value);
 
-        combatManager.SendStatChangeEvent(null, targetOfChange, stat, mod.value);
+        statAdjustmentManager.SendStatChangeEvent(null, targetOfChange, stat, mod.value);
     }
 
 

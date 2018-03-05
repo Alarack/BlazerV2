@@ -9,23 +9,37 @@ public class Inventory : MonoBehaviour {
 
     private Entity owner;
 
-
     public void Initialize(Entity owner) {
         this.owner = owner;
-
     }
-
 
     public void AddItemEntry(ItemData item) {
 
-        //Check for Stacking
-
-
-        items.Add(item);
-
-        owner.AbilityManager.PopulateSpecialAblities(item.abilityData);
+        if(CheckItem(item) == true) {
+            Stack(item);
+        }
+        else {
+            items.Add(item);
+            owner.AbilityManager.PopulateSpecialAblities(item.abilityData);
+        }
 
         //item.Initialize(this, owner);
+    }
+
+
+    private bool CheckItem(ItemData item) {
+        int count = items.Count;
+
+        for(int i = 0; i < count; i++) {
+            if(items[i].itemID == item.itemID) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void Stack(ItemData item) {
+
     }
 
 

@@ -177,7 +177,7 @@ public class EffectStatus : Effect {
 
                 Debug.Log("Stat " + statType + " is being adjusted by " + statAdjustmentValue);
 
-                CombatManager.ApplyTrackedStatMod(Source, target.GetComponent<Entity>(), statType, modStatic);
+                StatAdjustmentManager.ApplyTrackedStatMod(Source, target.GetComponent<Entity>(), statType, modStatic);
 
                 break;
 

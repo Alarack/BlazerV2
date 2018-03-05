@@ -216,7 +216,6 @@ public class SpecialAbility {
             return null;
         }
 
-
         for (int i = 0; i < effects.Count; i++) {
             //Debug.Log("Seeking " + effectName);
 

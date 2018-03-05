@@ -23,15 +23,7 @@ public class SpecialAbilityData : ScriptableObject {
     public List<SpecialAbilityData> sequencedAbilities = new List<SpecialAbilityData>();
     public float sequenceWindow = 0.5f;
 
-    //public List<SpecialAbilityRecovery> GetAllRecoveryMechanics() {
-    //    List<SpecialAbilityRecovery> results = new List<SpecialAbilityRecovery>();
 
-    //    for(int i = 0; i < recoveryManager.recoveryTypes.Count; i++) {
-    //        results.Add(recoveryManager.GetRecoveryMethodByType(recoveryManager.recoveryTypes[i]));
-    //    }
-
-    //    return results;
-    //}
 
     public SpecialAbilityRecovery GetRecoveryMechanic() {
         SpecialAbilityRecovery result = ObjectCopier.Clone(recoveryManager.GetRecoveryMethodByType(recoveryType)) as SpecialAbilityRecovery;
@@ -56,10 +48,8 @@ public class SpecialAbilityData : ScriptableObject {
 
     [System.Serializable]
     public class EffectHolder {
-
         public List<EffectAttack> attacks = new List<EffectAttack>();
         public List<EffectStatus> statusEffects = new List<EffectStatus>();
-
 
 
         public EffectSet GetEffectSet(Constants.SpecialAbilityEffectType effectType) {
@@ -72,7 +62,7 @@ public class SpecialAbilityData : ScriptableObject {
                         attackBundle.Add(clonedAttack);
                     }
 
-                    EffectSet attackEffect = new EffectSet(effectType, attackBundle/*.ConvertAll<Effect>(b => (Effect)b)*/);
+                    EffectSet attackEffect = new EffectSet(effectType, attackBundle);
 
                     return attackEffect;
 
@@ -84,7 +74,7 @@ public class SpecialAbilityData : ScriptableObject {
                         statusBundle.Add(clonedStatus);
                     }
 
-                    EffectSet statusAttacks = new EffectSet(effectType, statusBundle /*statusEffects.ConvertAll<Effect>(b => (Effect)b)*/);
+                    EffectSet statusAttacks = new EffectSet(effectType, statusBundle);
 
                     return statusAttacks;
 

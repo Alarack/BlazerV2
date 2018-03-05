@@ -126,7 +126,7 @@ public class EffectAttack : Effect {
         Entity targetEntity = target.GetComponent<Entity>();
 
         if(targetEntity != null) {
-            CombatManager.ApplyUntrackedStatMod(Source, targetEntity, Constants.BaseStatType.Health, damage);
+            StatAdjustmentManager.ApplyUntrackedStatMod(Source, targetEntity, Constants.BaseStatType.Health, damage);
         }
 
         base.Apply(target);

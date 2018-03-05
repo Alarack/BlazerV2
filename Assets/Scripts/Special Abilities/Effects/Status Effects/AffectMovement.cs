@@ -56,7 +56,7 @@ public class AffectMovement : Status {
 
                 //Debug.Log("Applyin a mod of " + mod.value);
 
-                CombatManager.ApplyTrackedStatMod(source, targetEntity, Constants.BaseStatType.MoveSpeed, mod);
+                StatAdjustmentManager.ApplyTrackedStatMod(source, targetEntity, Constants.BaseStatType.MoveSpeed, mod);
 
                 //CombatManager.ApplyUntrackedStatMod(source, target.GetComponent<Entity>(), Constants.BaseStatType.MoveSpeed, amount, StatCollection.StatModificationType.Multiplicative);
                 break;
@@ -82,7 +82,7 @@ public class AffectMovement : Status {
 
             case AffectMovementType.AlterSpeed:
                 if(mod != null) {
-                    CombatManager.RemoveTrackedStatMod(targetEntity, Constants.BaseStatType.MoveSpeed, mod);
+                    StatAdjustmentManager.RemoveTrackedStatMod(targetEntity, Constants.BaseStatType.MoveSpeed, mod);
                 }
                 else {
                     Debug.Log("Mod NUll");
