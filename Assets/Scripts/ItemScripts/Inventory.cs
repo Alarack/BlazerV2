@@ -17,6 +17,10 @@ public class Inventory : MonoBehaviour {
 
 
     public void AddItemEntry(ItemData item) {
+
+        //Check for Stacking
+
+
         items.Add(item);
 
         owner.AbilityManager.PopulateSpecialAblities(item.abilityData);
