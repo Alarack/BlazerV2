@@ -7,9 +7,6 @@ public class LootManager : MonoBehaviour {
     public float dropChance;
     public Constants.ItemPool pool;
 
-
-
-
     public void SpawnLoot() {
         if (!CheckDrop())
             return;

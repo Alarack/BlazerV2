@@ -18,7 +18,6 @@ public class ItemData : ScriptableObject  {
         Legendary = 3
     }
 
-
     public ItemIDs.ItemID itemID;
     public bool unlocked;
     public ItemType itemType;
@@ -26,10 +25,9 @@ public class ItemData : ScriptableObject  {
     public Constants.ItemPool itemPoolCategory;
     public string itemName;
     public Sprite icon;
+    public float basePrice;
 
     public List<SpecialAbilityData> abilityData = new List<SpecialAbilityData>();
-
-
 
 
 }

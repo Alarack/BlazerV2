@@ -99,9 +99,14 @@ public class Constants {
         None = 0,
         Boss = 1,
         Secret = 2,
-        Shop = 3,
-        StandardChest = 4,
-        AdvancedChest = 5,
+        StandardChest = 3,
+        AdvancedChest = 4,
+        ArtifactChest = 5,
+        Container = 6,
+        BasicShop = 7,
+        BlackMarket = 8,
+        TrinketShop = 9,
+        WeaponShop = 10,
     }
 
     public enum GameEvent {
