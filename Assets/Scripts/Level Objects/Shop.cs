@@ -17,7 +17,7 @@ public class Shop : LevelObject {
     private LootManager myLoot;
 
     // Use this for initialization
-    void Awake () {
+    void Start () {
         numOfUses = 1;
         myLoot = GetComponent<LootManager>();
         switch (myType)

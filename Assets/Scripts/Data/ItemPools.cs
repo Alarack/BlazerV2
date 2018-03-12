@@ -52,6 +52,10 @@ public class ItemPools : ScriptableObject {
     public ItemData GetItem(Constants.ItemPool pool) {
         ItemData result = null;
 
+        Debug.Log("Seeking " + pool);
+
+        //Debug.Log(pools.Count + " is pool count");
+
         for (int i = 0; i < pools.Count; i++) {
             if (pools[i].itemPool == pool) {
                 ItemPoolCategory target = pools[i];
@@ -60,19 +64,28 @@ public class ItemPools : ScriptableObject {
 
                 int itemCount = target.items.Count;
 
-                for(int j = 0; i < itemCount; j++) {
-                    if (target.items[j].unlocked) {
-                        unlockedItems.Add(target.items[j]);
-                    }
-                }
+                Debug.Log(itemCount + " items in " + target.items + " in pool" + pool);
 
-                if(unlockedItems.Count < 1) {
+                if(itemCount > 0) {
+                    for (int j = 0; j < itemCount; j++) {
+                        if (target.items[j].unlocked) {
+                            unlockedItems.Add(target.items[j]);
+                        }
+                    }
+
+                    if (unlockedItems.Count < 1) {
+                        return null;
+                    }
+
+                    int randomIndex = Random.Range(0, unlockedItems.Count);
+
+                    return unlockedItems[randomIndex];
+                }
+                else {
+                    Debug.LogError("There are 0 items in the item pool: " + pool.ToString());
                     return null;
                 }
-
-                int randomIndex = Random.Range(0, unlockedItems.Count);
-
-                return unlockedItems[randomIndex];
+               
             }
         }
 
