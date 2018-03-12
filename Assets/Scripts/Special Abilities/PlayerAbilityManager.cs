@@ -25,7 +25,7 @@ public class PlayerAbilityManager : AbilityManager {
 
 
         for (int i = 0; i < playerAbilities.Count; i++) {
-            if (Input.GetButtonDown("Fire" + (i + 1))) {
+            if (Input.GetButtonDown("Ability" + (i + 1))) {
                 ActivatePlayerAbility(i + 1);
             }
         }

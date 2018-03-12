@@ -15,10 +15,12 @@ public class PlayerDetector : Detector {
     {
         base.StayDetectorFunction(collision);
         playerDetected = true;
+
     }
     protected override void ExitDetectorFunction(Collider2D collision)
     {
         base.ExitDetectorFunction(collision);
         playerDetected = false;
+
     }
 }

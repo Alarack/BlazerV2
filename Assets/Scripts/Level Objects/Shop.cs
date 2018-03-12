@@ -35,8 +35,27 @@ public class Shop : LevelObject {
                 myLoot.pool = Constants.ItemPool.BlackMarket;
                 break;
         }
-        Debug.Log(myItem);
+        //Debug.Log(myItem);
         myItem = GameManager.GetItemPools().GetItem(myLoot.pool);
-        Debug.Log(myItem);
+        //Debug.Log(myItem);
+    }
+
+    public override bool UseRestrictionsMet()
+    {
+        if (GameManager.GetPlayer().GetComponent<Entity>().stats.GetStatModifiedValue(Constants.BaseStatType.Money) >= myItem.basePrice)
+        {
+            return base.UseRestrictionsMet();
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public override void ActivationFunction()
+    {
+        GameManager.GetPlayer().GetComponent<Entity>().stats.ApplyUntrackedMod(Constants.BaseStatType.Money, -myItem.basePrice, GameManager.GetPlayer().GetComponent<Entity>());
+        Debug.Log("Bought " + myItem + " for " + myItem.basePrice + " dollars. Player has " + GameManager.GetPlayer().GetComponent<Entity>().stats.GetStatModifiedValue(Constants.BaseStatType.Money) + " left.");
+        base.ActivationFunction();
     }
 }

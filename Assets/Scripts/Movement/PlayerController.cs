@@ -11,6 +11,9 @@ public class PlayerController : EntityMovement {
     private bool isJumping = false;
     private bool isFallingThrough = false;
 
+    public float lvlObjRadius;
+    private LevelObject currLvlObj;
+
     public override void Initialize() {
         base.Initialize();
         fallthroughTimer = new Timer("fallthroughTimer", disableDuration, true, DisableFallthrough);
@@ -19,7 +22,6 @@ public class PlayerController : EntityMovement {
             isFallingThrough = true;
         }
     }
-
 
     private void Update() {
         if (!isClimbing)
@@ -103,14 +105,28 @@ public class PlayerController : EntityMovement {
 
         //Debug.Log(Grounded + " is the status of Grounded");
         //Debug.Log(Platformed + " is the status of platformed");
-    }
+        FindNearestLevelObject();
 
+        /*--Use Level Object--*/
+
+        //Debug.Log("What");
+        if (Input.GetKeyDown(KeyCode.F) && currLvlObj != null && currLvlObj.UseRestrictionsMet())
+        {
+            currLvlObj.ActivationFunction();
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            Debug.Log("5 Keys Added and 20 Dollars Added");
+            GetComponent<Entity>().stats.ApplyUntrackedMod(Constants.BaseStatType.Keys, 5, GetComponent<Entity>());
+            GetComponent<Entity>().stats.ApplyUntrackedMod(Constants.BaseStatType.Money, 20, GetComponent<Entity>());
+
+        }
+    }
 
     protected override void Move() {
         myBody.velocity = new Vector2(currentSpeed, myBody.velocity.y);
         Jump();
     }
-
 
     private void TryJump() {
         if (Input.GetButtonDown("Jump") && (Grounded || Platformed || isClimbing)) {
@@ -137,4 +153,17 @@ public class PlayerController : EntityMovement {
         isFallingThrough = false;
     }
 
+    private void FindNearestLevelObject()
+    {
+        Collider2D[] collStockpile = Physics2D.OverlapCircleAll(transform.position, lvlObjRadius);
+        float smallestDistance = lvlObjRadius;
+        for (int i = 0; i < collStockpile.Length; i++)
+        {
+            if (collStockpile[i].gameObject.tag == "LevelObject" && Vector2.Distance(transform.position, collStockpile[i].transform.position) < smallestDistance)
+            {
+                smallestDistance = Vector2.Distance(transform.position, collStockpile[i].transform.position);
+                currLvlObj = collStockpile[i].gameObject.GetComponent<LevelObject>();
+            }
+        }
+    }
 }

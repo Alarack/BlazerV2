@@ -37,7 +37,7 @@ public class Chest : LevelObject {
 
     public void FixedUpdate()
     {
-        Debug.Log(UseRestrictionsMet());
+        //Debug.Log(UseRestrictionsMet());
     }
 
     public override bool UseRestrictionsMet()

@@ -52,7 +52,7 @@ public class ItemPools : ScriptableObject {
     public ItemData GetItem(Constants.ItemPool pool) {
         ItemData result = null;
 
-        Debug.Log("Seeking " + pool);
+        //Debug.Log("Seeking " + pool);
 
         //Debug.Log(pools.Count + " is pool count");
 
@@ -64,7 +64,7 @@ public class ItemPools : ScriptableObject {
 
                 int itemCount = target.items.Count;
 
-                Debug.Log(itemCount + " items in " + target.items + " in pool" + pool);
+                //Debug.Log(itemCount + " items in " + target.items + " in pool" + pool);
 
                 if(itemCount > 0) {
                     for (int j = 0; j < itemCount; j++) {
