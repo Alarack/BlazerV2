@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shop : LevelObject {
+public class Shop : LevelObject
+{
 
     public enum ShopType
     {
@@ -17,7 +18,8 @@ public class Shop : LevelObject {
     private LootManager myLoot;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         numOfUses = 1;
         myLoot = GetComponent<LootManager>();
         switch (myType)
@@ -35,8 +37,30 @@ public class Shop : LevelObject {
                 myLoot.pool = Constants.ItemPool.BlackMarket;
                 break;
         }
-        Debug.Log(myItem);
         myItem = GameManager.GetItemPools().GetItem(myLoot.pool);
-        Debug.Log(myItem);
+    }
+
+    public override bool UseRestrictionsMet()
+
+    {
+
+        if (GameManager.GetPlayer().GetComponent<Entity>().stats.GetStatModifiedValue(Constants.BaseStatType.Money) >= myItem.basePrice)
+        {
+            return base.UseRestrictionsMet();
+        }
+
+        else
+        {
+            return false;
+        }
+    }
+
+
+
+    public override void ActivationFunction()
+    {
+        StatAdjustmentManager.AddStaticPlayerStatAdjustment(Constants.BaseStatType.Money, -myItem.basePrice);
+        //Debug.Log("Bought " + myItem + " for " + myItem.basePrice + " dollars. Player has " + GameManager.GetPlayer().GetComponent<Entity>().stats.GetStatModifiedValue(Constants.BaseStatType.Money) + " left.");
+        base.ActivationFunction();
     }
 }

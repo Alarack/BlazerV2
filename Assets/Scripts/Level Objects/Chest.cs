@@ -37,7 +37,7 @@ public class Chest : LevelObject {
 
     public void FixedUpdate()
     {
-        Debug.Log(UseRestrictionsMet());
+        //Debug.Log(UseRestrictionsMet());
     }
 
     public override bool UseRestrictionsMet()
@@ -54,7 +54,7 @@ public class Chest : LevelObject {
 
     public override void ActivationFunction()
     {
-        GameManager.GetPlayer().GetComponent<Entity>().stats.ApplyUntrackedMod(Constants.BaseStatType.Keys, -(int)myType, GameManager.GetPlayer().GetComponent<Entity>());
+        StatAdjustmentManager.AddStaticPlayerStatAdjustment(Constants.BaseStatType.Keys, -(int)myType);
         Debug.Log("Opened a " + myType + " Chest");
         base.ActivationFunction();
     }
