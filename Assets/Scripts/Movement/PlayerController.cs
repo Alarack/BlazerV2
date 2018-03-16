@@ -52,6 +52,7 @@ public class PlayerController : EntityMovement {
         }
         if (isClimbing)
         {
+            transform.position = new Vector2(myLadder.transform.position.x, (transform.position.y + myBody.velocity.y * Time.deltaTime));
             if (Input.GetAxisRaw("Vertical") > 0)
             {
                 if (climbPoint.position.y > (myLadder.ladderTop - 0.01f))
@@ -62,7 +63,6 @@ public class PlayerController : EntityMovement {
                 {
                     Debug.Log("Climbing Up");
                     myLadder.ClimbUp(myClimber);
-                    myBody.position = new Vector2(myLadder.transform.position.x, myBody.position.y);
                     myBody.velocity = new Vector2(0f, ascendSpeed);
                 }
             }
@@ -76,7 +76,6 @@ public class PlayerController : EntityMovement {
                 {
                     Debug.Log("Climbing Down");
                     myLadder.ClimbDown(myClimber);
-                    myBody.position = new Vector2(myLadder.transform.position.x, myBody.position.y);
                     myBody.velocity = new Vector2(0f, -descendSpeed);
                 }
             }
@@ -84,7 +83,6 @@ public class PlayerController : EntityMovement {
             {
                 //Debug.Log("Clinging On");
                 myLadder.ClimbHold(myClimber);
-                myBody.position = new Vector2(myLadder.transform.position.x, myBody.position.y);
                 myBody.velocity = Vector2.zero;
             }
         }
