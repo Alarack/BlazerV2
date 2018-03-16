@@ -111,12 +111,8 @@ public class PlayerController : EntityMovement {
 
         /*--Use Level Object--*/
         if (Input.GetKeyDown(KeyCode.F) && currLvlObj != null && currLvlObj.UseRestrictionsMet())        {            currLvlObj.ActivationFunction();        } 
-        if (Input.GetKeyDown(KeyCode.O)) 
-        { 
-            Debug.Log("5 Keys Added and 20 Dollars Added"); 
-            StatAdjustmentManager.AddStaticPlayerStatAdjustment(Constants.BaseStatType.Keys, 5);
+        if (Input.GetKeyDown(KeyCode.O))        {            Debug.Log("5 Keys Added and 20 Dollars Added");            StatAdjustmentManager.AddStaticPlayerStatAdjustment(Constants.BaseStatType.Keys, 5);
             StatAdjustmentManager.AddStaticPlayerStatAdjustment(Constants.BaseStatType.Money, 20);
- 
         }
 
 
@@ -131,7 +127,7 @@ public class PlayerController : EntityMovement {
             {
                 smallestDistance = Vector2.Distance(transform.position, collStockpile[i].transform.position);
                 currLvlObj = collStockpile[i].gameObject.GetComponent<LevelObject>();
-                Debug.Log(currLvlObj);
+                //Debug.Log(currLvlObj);
             }
         }
     }
