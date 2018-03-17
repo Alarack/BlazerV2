@@ -27,6 +27,7 @@ public class PlayerController : EntityMovement {
     private void Update() {
         if (!isClimbing)
         {
+            Fallthrough(isFallingThrough);
             currentSpeed = Input.GetAxisRaw("Horizontal") * maxSpeed;
             if (currentSpeed != 0f && !owner.MyAnimator.GetBool("Walking"))
             {
@@ -52,6 +53,7 @@ public class PlayerController : EntityMovement {
         }
         if (isClimbing)
         {
+            Fallthrough(true);
             transform.position = new Vector2(myLadder.transform.position.x, (transform.position.y + myBody.velocity.y * Time.deltaTime));
             if (Input.GetAxisRaw("Vertical") > 0)
             {
@@ -90,7 +92,6 @@ public class PlayerController : EntityMovement {
 
         CheckFacing();
         TryJump();
-        Fallthrough(isFallingThrough);
         fallthroughTimer.UpdateClock();
         
         if(!Grounded && !Platformed)

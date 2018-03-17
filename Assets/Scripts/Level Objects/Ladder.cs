@@ -23,6 +23,7 @@ public class Ladder : MonoBehaviour {
             this.climberPoint = climberPoint;
         }
     }
+
     private void Start()
     {
         ladderBot = ladderBotObj.transform.position.y;
