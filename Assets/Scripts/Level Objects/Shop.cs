@@ -60,7 +60,7 @@ public class Shop : LevelObject
     public override void ActivationFunction()
     {
         StatAdjustmentManager.AddStaticPlayerStatAdjustment(Constants.BaseStatType.Money, -myItem.basePrice);
-        //Debug.Log("Bought " + myItem + " for " + myItem.basePrice + " dollars. Player has " + GameManager.GetPlayer().GetComponent<Entity>().stats.GetStatModifiedValue(Constants.BaseStatType.Money) + " left.");
+        Debug.Log("Bought " + myItem + " for " + myItem.basePrice + " dollars. Player has " + GameManager.GetPlayer().GetComponent<Entity>().stats.GetStatModifiedValue(Constants.BaseStatType.Money) + " left.");
         base.ActivationFunction();
     }
 }

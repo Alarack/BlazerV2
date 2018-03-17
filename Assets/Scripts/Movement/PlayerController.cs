@@ -87,9 +87,18 @@ public class PlayerController : EntityMovement {
                 myBody.velocity = Vector2.zero;
             }
         }
+        FindNearestLevelObject();
+
+        /*--Use Level Object--*/
+        if (Input.GetKeyDown(KeyCode.F) && currLvlObj != null && currLvlObj.UseRestrictionsMet())        {            currLvlObj.ActivationFunction();        }
+        if (Input.GetKeyDown(KeyCode.O))        {            Debug.Log("5 Keys Added and 20 Dollars Added");            StatAdjustmentManager.AddStaticPlayerStatAdjustment(Constants.BaseStatType.Keys, 5);
+            StatAdjustmentManager.AddStaticPlayerStatAdjustment(Constants.BaseStatType.Money, 20);
+        }
 
 
-        CheckFacing();
+    
+
+    CheckFacing();
         TryJump();
         fallthroughTimer.UpdateClock();
         
@@ -150,28 +159,3 @@ public class PlayerController : EntityMovement {
         }
     }
 }
-
-
-        FindNearestLevelObject();
-
-        /*--Use Level Object--*/
-        if (Input.GetKeyDown(KeyCode.F) && currLvlObj != null && currLvlObj.UseRestrictionsMet())        {            currLvlObj.ActivationFunction();        } 
-        if (Input.GetKeyDown(KeyCode.O))        {            Debug.Log("5 Keys Added and 20 Dollars Added");            StatAdjustmentManager.AddStaticPlayerStatAdjustment(Constants.BaseStatType.Keys, 5);
-            StatAdjustmentManager.AddStaticPlayerStatAdjustment(Constants.BaseStatType.Money, 20);
-        }
-
-
-    }
-    private void FindNearestLevelObject()
-    {
-        Collider2D[] collStockpile = Physics2D.OverlapCircleAll(transform.position, lvlObjRadius);
-        float smallestDistance = lvlObjRadius;
-        for (int i = 0; i < collStockpile.Length; i++)
-        {
-            if (collStockpile[i].gameObject.tag == "LevelObject"/* && Vector2.Distance(transform.position, collStockpile[i].transform.position) < smallestDistance*/)
-            {
-                smallestDistance = Vector2.Distance(transform.position, collStockpile[i].transform.position);
-                currLvlObj = collStockpile[i].gameObject.GetComponent<LevelObject>();
-                //Debug.Log(currLvlObj);
-            }
-        }

@@ -53,6 +53,5 @@ public class Altar : LevelObject {
             Debug.Log("ALTAR DONE BROKE");
             Destroy(this);
         }
-
     }
 }
