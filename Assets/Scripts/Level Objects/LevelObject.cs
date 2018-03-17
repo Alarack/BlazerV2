@@ -8,6 +8,7 @@ public abstract class LevelObject : MonoBehaviour {
     public int numOfUses;
 
 
+
     public virtual bool UseRestrictionsMet()
     {
         if (myDetector.playerDetected == true)

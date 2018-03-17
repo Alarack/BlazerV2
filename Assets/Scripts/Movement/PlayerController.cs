@@ -23,7 +23,6 @@ public class PlayerController : EntityMovement {
         }
     }
 
-
     private void Update() {
         if (!isClimbing)
         {
@@ -105,37 +104,12 @@ public class PlayerController : EntityMovement {
 
         //Debug.Log(Grounded + " is the status of Grounded");
         //Debug.Log(Platformed + " is the status of platformed");
-
-        FindNearestLevelObject();
-
-        /*--Use Level Object--*/
-        if (Input.GetKeyDown(KeyCode.F) && currLvlObj != null && currLvlObj.UseRestrictionsMet())        {            currLvlObj.ActivationFunction();        } 
-        if (Input.GetKeyDown(KeyCode.O))        {            Debug.Log("5 Keys Added and 20 Dollars Added");            StatAdjustmentManager.AddStaticPlayerStatAdjustment(Constants.BaseStatType.Keys, 5);
-            StatAdjustmentManager.AddStaticPlayerStatAdjustment(Constants.BaseStatType.Money, 20);
-        }
-
-
-    }
-    private void FindNearestLevelObject()
-    {
-        Collider2D[] collStockpile = Physics2D.OverlapCircleAll(transform.position, lvlObjRadius);
-        float smallestDistance = lvlObjRadius;
-        for (int i = 0; i < collStockpile.Length; i++)
-        {
-            if (collStockpile[i].gameObject.tag == "LevelObject"/* && Vector2.Distance(transform.position, collStockpile[i].transform.position) < smallestDistance*/)
-            {
-                smallestDistance = Vector2.Distance(transform.position, collStockpile[i].transform.position);
-                currLvlObj = collStockpile[i].gameObject.GetComponent<LevelObject>();
-                //Debug.Log(currLvlObj);
-            }
-        }
     }
 
     protected override void Move() {
         myBody.velocity = new Vector2(currentSpeed, myBody.velocity.y);
         Jump();
     }
-
 
     private void TryJump() {
         if (Input.GetButtonDown("Jump") && (Grounded || Platformed || isClimbing)) {
@@ -162,4 +136,42 @@ public class PlayerController : EntityMovement {
         isFallingThrough = false;
     }
 
+    private void FindNearestLevelObject()
+    {
+        Collider2D[] collStockpile = Physics2D.OverlapCircleAll(transform.position, lvlObjRadius);
+        float smallestDistance = lvlObjRadius;
+        for (int i = 0; i < collStockpile.Length; i++)
+        {
+            if (collStockpile[i].gameObject.tag == "LevelObject" && Vector2.Distance(transform.position, collStockpile[i].transform.position) < smallestDistance)
+            {
+                smallestDistance = Vector2.Distance(transform.position, collStockpile[i].transform.position);
+                currLvlObj = collStockpile[i].gameObject.GetComponent<LevelObject>();
+            }
+        }
+    }
 }
+
+
+        FindNearestLevelObject();
+
+        /*--Use Level Object--*/
+        if (Input.GetKeyDown(KeyCode.F) && currLvlObj != null && currLvlObj.UseRestrictionsMet())        {            currLvlObj.ActivationFunction();        } 
+        if (Input.GetKeyDown(KeyCode.O))        {            Debug.Log("5 Keys Added and 20 Dollars Added");            StatAdjustmentManager.AddStaticPlayerStatAdjustment(Constants.BaseStatType.Keys, 5);
+            StatAdjustmentManager.AddStaticPlayerStatAdjustment(Constants.BaseStatType.Money, 20);
+        }
+
+
+    }
+    private void FindNearestLevelObject()
+    {
+        Collider2D[] collStockpile = Physics2D.OverlapCircleAll(transform.position, lvlObjRadius);
+        float smallestDistance = lvlObjRadius;
+        for (int i = 0; i < collStockpile.Length; i++)
+        {
+            if (collStockpile[i].gameObject.tag == "LevelObject"/* && Vector2.Distance(transform.position, collStockpile[i].transform.position) < smallestDistance*/)
+            {
+                smallestDistance = Vector2.Distance(transform.position, collStockpile[i].transform.position);
+                currLvlObj = collStockpile[i].gameObject.GetComponent<LevelObject>();
+                //Debug.Log(currLvlObj);
+            }
+        }
